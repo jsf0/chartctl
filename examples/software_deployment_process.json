@@ -1,0 +1,23 @@
+{
+  "nodes": {
+    "requirements": { "label": "Gather Requirements", "shape": "rectangle", "fillcolor": "lightblue", "style": "filled" },
+    "planning": { "label": "Planning", "shape": "rectangle", "fillcolor": "lightgreen", "style": "filled" },
+    "design": { "label": "Design Architecture", "shape": "rectangle", "fillcolor": "lightyellow", "style": "filled" },
+    "implementation": { "label": "Implementation", "shape": "rectangle", "fillcolor": "lightcoral", "style": "filled" },
+    "testing": { "label": "Testing", "shape": "diamond", "fillcolor": "yellow", "style": "filled" },
+    "deployment": { "label": "Deploy to Production", "shape": "rectangle", "fillcolor": "lightpink", "style": "filled" },
+    "review": { "label": "Review and Monitor", "shape": "rectangle", "fillcolor": "lightblue", "style": "filled" },
+    "done": { "label": "Process Complete", "shape": "oval", "fillcolor": "lightgray", "style": "filled" }
+  },
+  "edges": [
+    { "from": "requirements", "to": "planning", "label": "Complete Requirements" },
+    { "from": "planning", "to": "design", "label": "Plan Approved" },
+    { "from": "design", "to": "implementation", "label": "Design Approved" },
+    { "from": "implementation", "to": "testing", "label": "Code Completed" },
+    { "from": "testing", "to": "deployment", "label": "Passed Tests", "color": "green" },
+    { "from": "testing", "to": "implementation", "label": "Failed Tests", "color": "red" },
+    { "from": "deployment", "to": "review", "label": "Deployment Successful" },
+    { "from": "review", "to": "done", "label": "Review Complete" }
+  ]
+}
+
