@@ -24,8 +24,6 @@ def validate_json(config):
     if not isinstance(config['edges'], list):
         raise ValueError('"edges" must be a list of edge definitions.')
 
-    # Optionally: Validate node and edge formats more strictly if needed
-
 def generate_flowchart_from_json(config_file, output_file):
     """
     Generate a flowchart based on the provided JSON configuration file.
@@ -82,19 +80,14 @@ def generate_flowchart_from_json(config_file, output_file):
     print(f"Flowchart saved as {output_file}.png")
 
 def main():
-    # Set up argument parser
     parser = argparse.ArgumentParser(description="Generate a flowchart from a JSON configuration file.")
     
-    # Input JSON file path
     parser.add_argument('-i', '--input', type=str, required=True, help='Path to the input JSON configuration file')
     
-    # Output file path (default is "flowchart.png")
     parser.add_argument('-o', '--output', type=str, default='flowchart', help='Path to save the output PNG file (without extension)')
     
-    # Parse the arguments
     args = parser.parse_args()
 
-    # Call the flowchart generation function with the provided input and output paths
     generate_flowchart_from_json(args.input, args.output)
 
 if __name__ == "__main__":
