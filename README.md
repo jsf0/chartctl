@@ -61,6 +61,8 @@ chartctl.py -i request_process.json
 ```
 
 It will create the following PNG:
+
+
 ![simple chart](https://kernelpanic.life/img/request_process.png)
 
 
@@ -87,4 +89,6 @@ You can optionally add colors and custom shapes for the nodes and connectors too
 ```
 
 This will generate a more colorful flowchart:
+
+
 ![flowchart with shapes and colors](https://kernelpanic.life/img/request_process_2.png)
