@@ -7,7 +7,7 @@ from graphviz import Digraph
 def validate_json(config):
     """
     Validate the structure of the JSON file.
-    Ensure it has "nodes" and "edges" as top-level keys.
+    Ensure it has "nodes" and "connectors" as top-level keys.
     """
     if not isinstance(config, dict):
         raise ValueError("JSON root must be an object (dictionary)")
@@ -18,11 +18,11 @@ def validate_json(config):
     if not isinstance(config['nodes'], dict):
         raise ValueError('"nodes" must be a dictionary of node definitions.')
 
-    if 'edges' not in config:
-        raise ValueError('The JSON file must contain an "edges" section.')
+    if 'connectors' not in config:
+        raise ValueError('The JSON file must contain an "connectors" section.')
     
-    if not isinstance(config['edges'], list):
-        raise ValueError('"edges" must be a list of edge definitions.')
+    if not isinstance(config['connectors'], list):
+        raise ValueError('"connectors" must be a list of edge definitions.')
 
 def generate_flowchart_from_json(config_file, output_file):
     """
@@ -66,9 +66,9 @@ def generate_flowchart_from_json(config_file, output_file):
             color = attributes.get('color', 'black')  # Default border color is black
             dot.node(node, label, shape=shape, fillcolor=fillcolor, style=style, color=color)
 
-    # Add edges with optional labels and colors
-    if 'edges' in config:
-        for edge in config['edges']:
+    # Add connectors with optional labels and colors
+    if 'connectors' in config:
+        for edge in config['connectors']:
             src = edge['from']
             dst = edge['to']
             label = edge.get('label', '')  # Optional label

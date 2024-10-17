@@ -50,7 +50,7 @@ See the examples directory for more sample configurations.
     "rejected": { "label": "Candidate Rejected", "shape": "rectangle", "fillcolor": "gray", "style": "filled" },
     "hired": { "label": "Candidate Hired", "shape": "oval", "fillcolor": "lightgray", "style": "filled" }
   },
-  "edges": [
+  "connectors": [
     { "from": "application_received", "to": "initial_interview", "label": "Screened" },
     { "from": "initial_interview", "to": "background_check", "label": "Passed Interview" },
     { "from": "background_check", "to": "offer_made", "label": "Clear" },

@@ -9,7 +9,7 @@
     "review": { "label": "Review and Monitor", "shape": "rectangle", "fillcolor": "lightblue", "style": "filled" },
     "done": { "label": "Process Complete", "shape": "oval", "fillcolor": "lightgray", "style": "filled" }
   },
-  "edges": [
+  "connectors": [
     { "from": "requirements", "to": "planning", "label": "Complete Requirements" },
     { "from": "planning", "to": "design", "label": "Plan Approved" },
     { "from": "design", "to": "implementation", "label": "Design Approved" },

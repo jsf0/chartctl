@@ -9,7 +9,7 @@
     "item_not_available": { "label": "Notify Out of Stock", "shape": "rectangle", "fillcolor": "gray", "style": "filled" },
     "done": { "label": "Process Complete", "shape": "oval", "fillcolor": "lightgray", "style": "filled" }
   },
-  "edges": [
+  "connectors": [
     { "from": "order_received", "to": "inventory_check", "label": "Start Process" },
     { "from": "inventory_check", "to": "item_available", "label": "Check Complete" },
     { "from": "item_available", "to": "item_allocation", "label": "Yes", "color": "green" },
