@@ -51,10 +51,9 @@ Here's a simple config file:
     { "from": "approved", "to": "end" }
   ]
 }
-
+```
 "Nodes" are the start/end blocks, processes, decision points, or anything else you want in your flowchart. "Connectors" are the lines that connect them together. You can label nodes and connectors however you want.
 
-```
 You can create the PNG out of the JSON above with the following command:
 ```bash
 chartctl.py -i request_process.json
