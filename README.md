@@ -29,38 +29,62 @@ This is a Python command-line tool that generates flowcharts based on a JSON con
 - `-i, --input` (required): Path to the JSON configuration file.
 - `-o, --output` (optional): Path to save the output PNG file (without the PNG extension). Defaults to `flowchart.png`.
 
-### Example Command
+### Examples
 
-```bash
-chartctl.py -i flowchart_config.json -o output_flowchart
-```
-
-### Example configs
-See the examples directory for more sample configurations.
-
+Here's a simple config file:
 ```
 {
   "nodes": {
-    "application_received": { "label": "Application Received", "shape": "oval", "fillcolor": "lightblue", "style": "filled" },
-    "initial_interview": { "label": "Initial Interview", "shape": "rectangle", "fillcolor": "lightgreen", "style": "filled" },
-    "background_check": { "label": "Background Check", "shape": "rectangle", "fillcolor": "lightyellow", "style": "filled" },
-    "offer_made": { "label": "Offer Made?", "shape": "diamond", "fillcolor": "yellow", "style": "filled" },
-    "offer_accepted": { "label": "Offer Accepted?", "shape": "diamond", "fillcolor": "lightyellow", "style": "filled" },
-    "onboarding": { "label": "Onboarding Process", "shape": "rectangle", "fillcolor": "lightpink", "style": "filled" },
-    "rejected": { "label": "Candidate Rejected", "shape": "rectangle", "fillcolor": "gray", "style": "filled" },
-    "hired": { "label": "Candidate Hired", "shape": "oval", "fillcolor": "lightgray", "style": "filled" }
+    "start": { "label": "Start Process" },
+    "approval": { "label": "Request Approval" },
+    "approved": { "label": "Approved" },
+    "rejected": { "label": "Rejected" },
+    "retry": { "label": "Retry Request" },
+    "end": { "label": "End Process" }
   },
   "connectors": [
-    { "from": "application_received", "to": "initial_interview", "label": "Screened" },
-    { "from": "initial_interview", "to": "background_check", "label": "Passed Interview" },
-    { "from": "background_check", "to": "offer_made", "label": "Clear" },
-    { "from": "offer_made", "to": "offer_accepted", "label": "Yes" },
-    { "from": "offer_made", "to": "rejected", "label": "No", "color": "red" },
-    { "from": "offer_accepted", "to": "onboarding", "label": "Yes", "color": "green" },
-    { "from": "offer_accepted", "to": "rejected", "label": "No", "color": "red" },
-    { "from": "onboarding", "to": "hired", "label": "Completed" }
+    { "from": "start", "to": "approval" },
+    { "from": "approval", "to": "approved", "label": "Yes" },
+    { "from": "approval", "to": "rejected", "label": "No" },
+    { "from": "rejected", "to": "retry", "label": "Retry?" },
+    { "from": "retry", "to": "approval" },
+    { "from": "approved", "to": "end" }
+  ]
+}
+
+"Nodes" are the start/end blocks, processes, decision points, or anything else you want in your flowchart. "Connectors" are the lines that connect them together. You can label nodes and connectors however you want.
+
+```
+You can create the PNG out of the JSON above with the following command:
+```bash
+chartctl.py -i request_process.json
+```
+
+It will create the following PNG:
+![simple chart](https://kernelpanic.life/img/request_process.png)
+
+
+You can optionally add colors and custom shapes for the nodes and connectors too:
+```
+{
+  "nodes": {
+    "start": { "label": "Start Process", "shape": "oval", "fillcolor": "lightblue", "style": "filled" },
+    "approval": { "label": "Request Approval", "shape": "diamond", "fillcolor": "yellow", "style": "filled" },
+    "approved": { "label": "Approved", "shape": "rectangle", "fillcolor": "lightgreen", "style": "filled" },
+    "rejected": { "label": "Rejected", "shape": "rectangle", "fillcolor": "lightcoral", "style": "filled" },
+    "retry": { "label": "Retry Request", "shape": "rectangle", "fillcolor": "lightgray", "style": "filled" },
+    "end": { "label": "End Process", "shape": "oval", "fillcolor": "lightblue", "style": "filled" }
+  },
+  "connectors": [
+    { "from": "start", "to": "approval" },
+    { "from": "approval", "to": "approved", "label": "Yes", "color": "green" },
+    { "from": "approval", "to": "rejected", "label": "No", "color": "red" },
+    { "from": "rejected", "to": "retry", "label": "Retry?", "color": "orange" },
+    { "from": "retry", "to": "approval" },
+    { "from": "approved", "to": "end" }
   ]
 }
 ```
 
-
+This will generate a more colorful flowchart:
+![flowchart with shapes and colors](https://kernelpanic.life/img/request_process_2.png)
